@@ -1,0 +1,33 @@
+services:
+  postgres:
+    container_name: postgres_book-network
+    image: 'postgres:latest'
+    environment:
+      - 'POSTGRES_USER=stac'
+      - 'POSTGRES_PASSWORD=secret'
+      - 'PGDATA: /var/lib/postgresql/data'
+      - 'POSTGRES_DB=book_social_network'
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - book_social_net
+
+    restart: unless-stopped
+
+  mail-dev:
+    container_name: mail-dev_book-network
+    image: maildev/maildev
+    ports:
+      - 1080:1080
+      - 1025:1025
+
+networks:
+  book_social_net:
+    driver: bridge
+
+volumes:
+  postgres:
+    driver: local
+
