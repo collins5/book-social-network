@@ -110,7 +110,7 @@ public class User implements UserDetails, Principal {
                 .collect(Collectors.toList());
     }
 
-    private String fullName() {
+    public String fullName() {
         return firstname + " " + lastname;
     }
 }
